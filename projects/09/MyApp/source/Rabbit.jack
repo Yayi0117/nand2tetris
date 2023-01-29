@@ -1,0 +1,120 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/09/MyApp/Rabbit.jack
+
+/** Implements a graphical Rabbit. */
+class Rabbit {
+
+   field int x, y,memAddress; // screen location of the rabbit
+
+   /** Constructs a new rabbit with a given location. */
+   constructor Rabbit new(int Ax, int Ay) {
+      let x = Ax;
+      let y = Ay;
+      do draw();
+      return this;
+   }
+
+   /** Disposes this rabbit. */
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   /** Returns the X coordinate of rabbit. */
+	method int getX() {
+		return x;
+	}
+	
+	/** Returns the Y coordinate of rabbit. */
+	method int getY() {
+		return y;
+	}
+
+   /** Draws the rabbit on the screen. */
+   method void draw() {
+      let memAddress = 16384+Math.multiply(32, y) + Math.divide(x, 16);
+      do Memory.poke(memAddress+0, 6168);
+      do Memory.poke(memAddress+32, 9252);
+      do Memory.poke(memAddress+64, 9252);
+      do Memory.poke(memAddress+96, 9252);
+      do Memory.poke(memAddress+128, 9252);
+      do Memory.poke(memAddress+160, 9252);
+      do Memory.poke(memAddress+192, 9252);
+      do Memory.poke(memAddress+224, 17346);
+      do Memory.poke(memAddress+256, -30703);
+      do Memory.poke(memAddress+288, -30703);
+      do Memory.poke(memAddress+320, -32383);
+      do Memory.poke(memAddress+352, -31135);
+      do Memory.poke(memAddress+384, 16386);
+      do Memory.poke(memAddress+416, 16386);
+      do Memory.poke(memAddress+448, 12300);
+      do Memory.poke(memAddress+480, 4080);
+	return;
+}
+
+   /** Erases the rabbit from the screen. */
+   method void erase() {
+      let memAddress = 16384+Math.multiply(32, y) + Math.divide(x, 16);
+         do Memory.poke(memAddress+0, 0);
+         do Memory.poke(memAddress+32, 0);
+         do Memory.poke(memAddress+64, 0);
+         do Memory.poke(memAddress+96, 0);
+         do Memory.poke(memAddress+128, 0);
+         do Memory.poke(memAddress+160, 0);
+         do Memory.poke(memAddress+192, 0);
+         do Memory.poke(memAddress+224, 0);
+         do Memory.poke(memAddress+256, 0);
+         do Memory.poke(memAddress+288, 0);
+         do Memory.poke(memAddress+320, 0);
+         do Memory.poke(memAddress+352, 0);
+         do Memory.poke(memAddress+384, 0);
+         do Memory.poke(memAddress+416, 0);
+         do Memory.poke(memAddress+448, 0);
+         do Memory.poke(memAddress+480, 0);
+      return;
+   }
+
+   /** Moves the rabbit up by 2 pixels. */
+   method void moveUp() {
+      if (y > 2) {
+         do erase();
+			let y = y - 2;
+         do draw();
+      }
+      return;
+   }
+
+   /** Moves the rabbit down by 2 pixels. */
+   method void moveDown() {
+      if ((y + 16) < 253) {
+         do erase();
+			let y = y + 2;
+         do draw();
+      }
+      return;
+   }
+
+   /** Moves the rabbit left by 2 pixels. */
+   method void moveLeft() {
+      if (x > 2) {
+         do erase();
+			let x = x - 2;
+         do draw();
+      }
+      return;
+
+      
+   }
+
+   /** Moves the rabbit right by 2 pixels. */
+      method void moveRight() {
+		if ((x + 16) < 509) {
+         do erase();
+			let x = x + 2;
+         do draw();
+		}
+		return;
+	}
+}

@@ -1,0 +1,203 @@
+label:
+f'({label})\n'
+
+
+goto:
+f'@{label}\n'
+0;JMP
+
+
+if-goto:
+@SP
+M=M-1
+A=M
+D=M
+f'@{label}\n'
+D;JNE
+
+
+call:
+@functionName$ret.i   //the return address for the current function 
+D=A
+@SP
+A=M
+M=D  // push return address
+@LCL
+D=M
+@SP
+M=M+1
+A=M
+M=D // push LCL
+@ARG
+D=M
+@SP
+M=M+1
+A=M
+M=D  //push ARG
+@THIS
+D=M
+@SP
+M=M+1
+A=M
+M=D  //push THIS
+@THAT
+D=M
+@SP
+M=M+1
+A=M
+M=D  //push THAT
+@SP
+M=M+1
+@n  
+D=A
+@5  
+D=D+A
+@SP
+D=M-D
+@ARG
+M=D   // ARG=SP-n-5
+@SP
+D=M
+@LCL
+M=D  //LCL=SP
+@filename.functionname
+0;JMP
+(functionName$ret.i)
+
+function:
+(filename.functionname)
+@i
+M=0
+(LOOP_filename.functionname)
+@i
+D=M
+@name_local_k  // k equals to local variable number
+D=D-A
+@continue_filename.functionname
+D;JEQ
+@SP
+A=M
+M=0
+@SP
+M=M+1
+@LOOP_filename.functionname
+0;JMP
+(continue_filename.functionname)
+
+return：
+@LCL
+D=M
+@R15   //@R15
+M=D
+@5
+D=A
+@R15
+A=M-D
+D=M  
+@R14
+M=D    //get the return address
+@SP
+M=M-1
+A=M
+D=M  //pop the top most value for retrun
+@ARG
+A=M 
+M=D //reposition the return value for the caller
+@ARG
+D=M
+@SP
+M=D+1  //SP=ARG+1
+@R15
+A=M-1
+D=M
+@THAT
+M=D   //THAT=*(endFrame-1)
+@2
+D=A
+@R15
+A=M-D
+D=M
+@THIS
+M=D  //THIS=*(endFame-2)
+@3
+D=A
+@R15
+A=M-D
+D=M
+@ARG
+M=D  //ARG=*(endFame-3)
+@4
+D=A
+@R15
+A=M-D
+D=M
+@ARG
+M=D  //LCL=*(endFame-4)
+@R14
+A=M
+0;JMP
+
+
+SP=256：
+@256
+D=A
+@SP
+M=D
+
+call Sys.init 0:
+@BOOTSTRAP  //the return address for the current function 
+D=A
+@SP
+A=M
+M=D  // push return address
+
+@LCL
+D=M
+@SP
+M=M+1
+A=M
+M=D // push LCL
+@ARG
+D=M
+@SP
+M=M+1
+A=M
+M=D  //push ARG
+@THIS
+D=M
+@SP
+M=M+1
+A=M
+M=D  //push THIS
+@THAT
+D=M
+@SP
+M=M+1
+A=M
+M=D  //push THAT
+@SP
+M=M+1
+@n  
+D=A
+@5  
+D=D+A
+@ARG
+M=M-D   // ARG=SP-n-5
+@SP
+D=M
+@LCL
+M=D  //LCL=SP
+@Sys.init
+0;JMP
+(BOOTSTRAP)
+
+
+
+
+
+
+
+
+
+
+

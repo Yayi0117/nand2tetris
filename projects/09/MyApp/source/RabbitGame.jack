@@ -1,0 +1,140 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/09/MyApp/RabbitGame.jack
+
+/**
+ * Implements the Rabbit game.
+ * This simple game allows the user to move a black rabbit around
+ * the screen to eat all carrots.
+ * When the game starts, a rabbit of 16 by 16 pixels and  several carrots are 
+ * shown at the middle of the screen. The user controls the rabbit as follows.
+ * The 4 arrow keys are used to move the rabbit up, down, left, and right.
+ * The 'q' key is used to quit the game.
+ */
+
+class RabbitGame {
+   field Rabbit rabbit; // the rabbit of this game
+   field Array carrots, carrots_state; // the carrots of this game and its corresponding state
+   field int direction; // the rabbit's current direction: 
+                        // 0=none, 1=up, 2=down, 3=left, 4=right
+
+   /** Constructs a new Rabbit Game. */
+   constructor RabbitGame new() {
+      // Creates a 16 by 16 pixels rabbit and put it at the middle
+      // of the screen.
+      let rabbit = Rabbit.new(248, 120);
+      let direction = 0;  // initial state is no movement
+      do createCarrots(); // put four carrots on the screen 
+      return this;
+   }
+
+   // Creates 4 carrots and put it at the corners of the screen
+   method void createCarrots(){
+      var Carrot carrot0, carrot1, carrot2, carrot3;   
+      let carrot0 = Carrot.new(0,0);    
+      let carrot1 = Carrot.new(480,0);
+      let carrot2 = Carrot.new(0,240);
+      let carrot3 = Carrot.new(480,240);
+      let carrots = Array.new(4);
+      let carrots[0] = carrot0;
+      let carrots[1] = carrot1; 
+      let carrots[2] = carrot2;
+      let carrots[3] = carrot3;
+      let carrots_state = Array.new(4);
+      let carrots_state[0] = true;
+      let carrots_state[1] = true;
+      let carrots_state[2] = true;
+      let carrots_state[3] = true;
+      return;
+   }
+
+   /** Disposes this game. */
+   method void dispose() {
+      var int i;
+      var Carrot temp;
+      do rabbit.dispose();
+      let i=0;
+      while(i<4){
+         let temp = carrots[i];
+         do temp.dispose();
+         let i = i + 1;
+      }
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   /** Moves the rabbit in the current direction. */
+   method void moveRabbit() {
+      if (direction = 1) { do rabbit.moveUp(); }
+      if (direction = 2) { do rabbit.moveDown(); }
+      if (direction = 3) { do rabbit.moveLeft(); }
+      if (direction = 4) { do rabbit.moveRight(); }
+      do Sys.wait(5);  // delays the next movement
+      return;
+   }
+
+   /** Runs the game: handles the user's inputs and moves the rabbit accordingly */
+   method void run() {
+      var char key;  // the key currently pressed by the user
+      var boolean exit;
+      var Carrot temp;
+      let exit = false;
+      
+      while (~exit) {
+         // waits for a key to be pressed
+         while (key = 0) {
+            let key = Keyboard.keyPressed();
+            do moveRabbit();
+         }
+         if (key = 81)  { let exit = true; }     // q key
+         if (key = 131) { let direction = 1; }   // up arrow
+         if (key = 133) { let direction = 2; }   // down arrow
+         if (key = 130) { let direction = 3; }   // left arrow
+         if (key = 132) { let direction = 4; }   // right arrow
+
+         // waits for the key to be released
+         while (~(key = 0)) {
+            let key = Keyboard.keyPressed();
+            do moveRabbit();
+            // erase the carrot when rabbit 'eat' it
+            if (rabbit.getX()<17){
+               if(rabbit.getY()<17){
+                  let temp = carrots[0];
+                  if (carrots_state[0]){
+                     do temp.erase();
+                     let carrots_state[0] = false;
+                  }
+               }
+               if(rabbit.getY()>239){
+                  let temp = carrots[2];
+                  if (carrots_state[2]){
+                     do temp.erase();
+                     let carrots_state[2] = false;
+                  }
+               }
+            }
+            if (rabbit.getX()>495){
+               if(rabbit.getY()<17){
+                  let temp = carrots[1];
+                  if (carrots_state[1]){
+                     do temp.erase();
+                     let carrots_state[1] = false;
+                  }
+               }
+               if(rabbit.getY()>239){
+                  let temp = carrots[3];
+                  if (carrots_state[3]){
+                     do temp.erase();
+                     let carrots_state[3] = false;
+                  }
+               }
+            }
+         }
+     } // while
+     return;
+   }
+}
+
+
+

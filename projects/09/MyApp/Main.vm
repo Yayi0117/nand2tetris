@@ -1,0 +1,11 @@
+function Main.main 1
+call RabbitGame.new 0
+pop local 0
+push local 0
+call RabbitGame.run 1
+pop temp 0
+push local 0
+call RabbitGame.dispose 1
+pop temp 0
+push constant 0
+return

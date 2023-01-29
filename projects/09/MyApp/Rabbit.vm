@@ -1,0 +1,349 @@
+function Rabbit.new 0
+push constant 3
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push pointer 0
+call Rabbit.draw 1
+pop temp 0
+push pointer 0
+return
+function Rabbit.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Rabbit.getX 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Rabbit.getY 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function Rabbit.draw 0
+push argument 0
+pop pointer 0
+push constant 16384
+push constant 32
+push this 1
+call Math.multiply 2
+add
+push this 0
+push constant 16
+call Math.divide 2
+add
+pop this 2
+push this 2
+push constant 0
+add
+push constant 6168
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 32
+add
+push constant 9252
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 64
+add
+push constant 9252
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 96
+add
+push constant 9252
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 128
+add
+push constant 9252
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 160
+add
+push constant 9252
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 192
+add
+push constant 9252
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 224
+add
+push constant 17346
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 256
+add
+push constant 30703
+neg
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 288
+add
+push constant 30703
+neg
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 320
+add
+push constant 32383
+neg
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 352
+add
+push constant 31135
+neg
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 384
+add
+push constant 16386
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 416
+add
+push constant 16386
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 448
+add
+push constant 12300
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 480
+add
+push constant 4080
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Rabbit.erase 0
+push argument 0
+pop pointer 0
+push constant 16384
+push constant 32
+push this 1
+call Math.multiply 2
+add
+push this 0
+push constant 16
+call Math.divide 2
+add
+pop this 2
+push this 2
+push constant 0
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 32
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 64
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 96
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 128
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 160
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 192
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 224
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 256
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 288
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 320
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 352
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 384
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 416
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 448
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push this 2
+push constant 480
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push constant 0
+return
+function Rabbit.moveUp 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 2
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call Rabbit.erase 1
+pop temp 0
+push this 1
+push constant 2
+sub
+pop this 1
+push pointer 0
+call Rabbit.draw 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function Rabbit.moveDown 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 16
+add
+push constant 253
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call Rabbit.erase 1
+pop temp 0
+push this 1
+push constant 2
+add
+pop this 1
+push pointer 0
+call Rabbit.draw 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function Rabbit.moveLeft 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 2
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call Rabbit.erase 1
+pop temp 0
+push this 0
+push constant 2
+sub
+pop this 0
+push pointer 0
+call Rabbit.draw 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function Rabbit.moveRight 0
+push argument 0
+pop pointer 0
+push this 0
+push constant 16
+add
+push constant 509
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call Rabbit.erase 1
+pop temp 0
+push this 0
+push constant 2
+add
+pop this 0
+push pointer 0
+call Rabbit.draw 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
