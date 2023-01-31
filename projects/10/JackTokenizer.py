@@ -67,7 +67,7 @@ class JackTokenizer:
 
 
 #the following code is used to test JackTokenizer:
-
+'''
 file = input("enter the file path you want to tokenize: ")
 tokenizer = JackTokenizer(file)
 root = ET.Element('tokens')  # generate file root 'tokens'
@@ -98,6 +98,4 @@ while tokenizer.hasMoreTokens():  #generate subtrees
 
 tree = ET.ElementTree(root)
 tree.write((file[:-5]+'TT.xml')) # write off the whole tree
-    
-
-
+'''
