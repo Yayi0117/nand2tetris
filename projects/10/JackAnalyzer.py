@@ -10,8 +10,6 @@ def analyzer(file):
     """
     tokenizer = JackTokenizer(file)
     output = os.path.splitext(file)[0]+'.xml'
-    #with open(output, 'w+') : 
-        #pass
     c= CompilationEngine(tokenizer,output)
     c.compileClass()
 

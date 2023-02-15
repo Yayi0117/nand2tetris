@@ -20,7 +20,7 @@ class JackTokenizer:
                 line = line.split('//')[0] #get rid of comment in lines
                 sublines = line.split('"')  # pick out the stringConstant
                 for i in range(len(sublines)):
-                    if i%2 == 0: #when the subline is not stringConstant, generate tokens from it
+                    if i%2 == 0: #when the subline is not a stringConstant, generate tokens from it
                         sublines[i]=[token for token in re.split('(\W)',sublines[i]) if token not in ('', ' ')] 
                         tokens.extend(sublines[i])
                     if i%2 == 1: #when the subline is a stringConstant, put a pair of " around it 

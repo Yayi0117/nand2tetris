@@ -46,7 +46,8 @@ class CompilationEngine:
                 newElement = ET.SubElement(root, "stringConstant")
                 newElement.text = ' '+self.tokenizer.stringVal()+' '
                 newElement.tail = '\n' 
-        self.tokenizer.advance()     
+        if self.tokenizer.hasMoreTokens():
+            self.tokenizer.advance()     
 
 
     def compileClass(self):
@@ -62,10 +63,7 @@ class CompilationEngine:
             self.compileClassVarDec(root)
         while self.tokenizer.current_token in ['constructor','function','method']:  #subroutineDec*
             self.compileSubroutine(root)
-        # the last symbol
-        newElement = ET.SubElement(root, "symbol")
-        newElement.text = ' } '
-        newElement.tail = '\n' 
+        self.process(root,'symbol')#'}'
 
         tree = ET.ElementTree(root)
         tree.write(self.output)   # write off the whole tree
@@ -199,17 +197,6 @@ class CompilationEngine:
             self.process(newroot,'symbol') #'}'
 
     def compileWhile(self,root):
-        """
-        print("<whileStatement>")
-        process("while")
-        process("(")
-        compileExpression()
-        process(")")
-        process("{")
-        compileStatements()
-        process("}")
-        print("</whileStatement>")
-        """
         #whileStatement:'while''('expression')''{'statements'}'
         newroot = ET.SubElement(root, 'whileStatement')
         newroot.text = '\n'
