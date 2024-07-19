@@ -58,11 +58,5 @@ The Nand2Tetris course, also known as "The Elements of Computing Systems," provi
   - **/project10**: Compiler I
   - **/project11**: Compiler II
   - **/project12**: Operating System
-- **/docs**: The book and notes for each project.
+- **/tools**: The toolset for testing each unit.
 
-
-## How to Use
-
-Clone this repository:
-   ```bash
-   git clone https://github.com/yourusername/nand2tetris.git
