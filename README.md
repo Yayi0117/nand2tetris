@@ -35,7 +35,7 @@ The Nand2Tetris course, also known as "The Elements of Computing Systems," provi
 - **Project 8: Virtual Machine II**
   - Extended the virtual machine to handle control and function calls.
 - **Project 9: High-Level Language**
-  - Developed a compiler for the Jack programming language.
+  - Write simple programs in the Jack programming language.
 - **Project 10: Compiler I**
   - Built the syntax analyzer and parser.
 - **Project 11: Compiler II**
