@@ -23,13 +23,13 @@ The Nand2Tetris course, also known as "The Elements of Computing Systems," provi
   - Developed memory components, such as flip-flops and registers.
 - **Project 4: Machine Language**
   - Designed and tested the Hack machine language.
-
-### Part II: Software Construction
-
 - **Project 5: Computer Architecture**
   - Assembled the Hack CPU and connected it with memory and input/output devices.
 - **Project 6: Assembler**
   - Created an assembler to translate Hack assembly language into binary machine code.
+
+### Part II: Software Construction
+
 - **Project 7: Virtual Machine I**
   - Implemented the stack-based virtual machine.
 - **Project 8: Virtual Machine II**
