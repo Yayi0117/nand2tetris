@@ -42,6 +42,7 @@ The Nand2Tetris course, also known as "The Elements of Computing Systems," provi
   - Implemented the code generator.
 - **Project 12: Operating System**
   - Designed the basic operating system, including the memory manager, string processing, and input/output handling.
+  - Developed a simple game using the entire hardware and software stack I've built.
 
 ## Repository Structure
 
